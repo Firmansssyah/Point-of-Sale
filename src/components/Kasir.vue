@@ -24,7 +24,7 @@
                                         <th>Nama Produk</th>
                                         <th>Qty</th>
                                         <th>Harga</th>
-                                        <th>Total Harga</th>
+                                        <th>Jumlah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,8 +34,8 @@
                                         <td style="text-align: center; padding: 0px;">
                                             <input type="number" v-model="item.qty">
                                         </td>
-                                        <td>Rp. {{item.price}}</td>
-                                        <td>Rp. {{item.qty * item.price}}</td>
+                                        <td>Rp. {{formatPrice(item.price)}}</td>
+                                        <td>Rp. {{formatPrice(item.qty * item.price)}}</td>
                                     </tr>
                                 </tbody>                                
                             </table>
@@ -43,22 +43,24 @@
                         <div class="footer-card">
                             <table>
                                 <tr>
+                                    <td>Diskon</td>
+                                    <td>:<input type="text" v-model="discount"> %</td>
+                                </tr>
+                                <tr>
                                     <td>Total</td>
-                                    <td>: Rp. <input type="text" v-model="countTotals" readonly style="border: none;"></td>
+                                    <td>: Rp. <input type="hidden" v-model="countTotals" readonly style="border: none;">{{ formatPrice(totals)}}</td>
                                 </tr>
                                 <tr>
                                     <td>Bayar</td>
-                                    <td>: Rp. <input type="text" v-model="bayar"></td>
+                                    <td>: Rp. <input type="text" v-model="bayar" v-on:keypress="isNumber(event)"></td>
                                 </tr>
                                 <tr>
                                     <td>Kembali</td>
-                                    <td>: Rp. <input type="text" v-model="kembalian" readonly style="border: none;"></td>
+                                    <td>: Rp. <input type="hidden" v-model="kembalian" readonly style="border: none;">{{ formatPrice(kembali)}}</td>
                                 </tr>
-                                <tr>
-                                    <td colspan="1">
-                                        <a>Transaksi</a>
-                                    </td>
-                                </tr>
+                                <div style="padding: 18px 0px; float: right;">
+                                    <a>Transaksi</a>
+                                </div>
                             </table>
                         </div>
                     </div>
@@ -72,8 +74,9 @@
 export default {
     data(){
         return {
+            discount: 0,
             totals: 0,
-            bayar: 0,
+            bayar: 20000,
             kembali: 0,
             items:[
                 {
@@ -96,10 +99,15 @@ export default {
         },
         countTotals(){
             let total = 0;
+            let disc = 0;
             for(let i in this.items) {
                 total += this.items[i].qty * this.items[i].price;
             }
-            return this.totals = total;
+            if(this.discount > 0){
+                disc = (total * this.discount) / 100;
+                total = total - disc;
+            }
+            return this.totals = total
         },
         kembalian(){
             let kali;
@@ -110,8 +118,23 @@ export default {
                 this.kembali = 0
             }
             return this.kembali
-        },
+        },        
+    },
+    methods: {
+    formatPrice(value) {
+        let val = (value/1).toFixed(0).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
+    isNumber: function(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+        } else {
+            return true;
+        }
     }
+}
 }
 </script>
 
@@ -183,7 +206,6 @@ export default {
 }
 .component .card .body-card table{
     width: 100%;
-    
 }
 .component .card .body-card table thead tr th{
     padding: 8px;
@@ -230,13 +252,16 @@ export default {
     outline: none;
     border: 1.5px solid gray;
 }
-.component .card .footer-card table tr td a{
+.component .card .footer-card a{
     padding: 6px 10px;
     border: 1px solid #d6cfcf;
     border-radius: 3px;
     font-weight: 500;
+    margin: 10px;
+    transition: 300ms;
 }
-.component .card .footer-card table tr td a:hover{
+.component .card .footer-card a:hover{
     cursor: pointer;
+    border: 1px solid #0078D7;
 }
 </style>
