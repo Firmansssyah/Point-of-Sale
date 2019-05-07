@@ -71,7 +71,7 @@ export default {
 <style src='./assets/css/grid.min.css'></style>
 <style src='./assets/micon_nb/css/micon_nb.min.css'></style>
 <style>
-*{margin: 0px; padding: 0px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+*{margin: 0px; padding: 0px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #4C4A48;}
 .sidebar {
   position: fixed;
   overflow: hidden;
@@ -94,13 +94,14 @@ export default {
   padding: 12px 0px;
 }
 .sidebar .side-content .user .img{
+    height: 40px;
     width: 50px;
-    height: 50px;
-    border: 1px solid black;
     border-radius: 50%;
+    display: inline-block;
     background-image: url("./assets/logo.png");
     background-position: center;
-    background-size: 50px;
+    box-shadow: 0px 2px 8px #8080806b;
+    background-size: cover;
 }
 .sidebar .side-content .user .name{
     padding: 4px 18px;
@@ -187,5 +188,14 @@ export default {
 }
 .main .content{
   padding: 100px 50px 0px 50px;
+}
+@media (max-width: 992px){
+  .sidebar{
+  left: -295px;
+  transition: 1000ms;
+  }
+  .main{
+  width: 100%;
+  }
 }
 </style>
