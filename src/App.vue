@@ -1,27 +1,28 @@
 <template>
   <div id="app">  
     <div class="container-fluid">
+      <div class="" v-bind:class="{ opacity : showSidebar }" @click="showSidebar = !showSidebar"></div>
       <div class="row">
         <div class="col-lg-12">
-          <div class="sidebar">
+          <div class="sidebar" v-bind:class="{ showSidebar: showSidebar }">
             <div class="side-content">
               <div class="s-title">Pos-App</div>
               <div class="user">
                 <div class="img"></div>
                 <div class="name">
-                  <b>Mohammad Firmansyah</b> <br>
+                  <b>M. Firmansyah</b> <br>
                   <i>Owner</i>
                 </div>
               </div>
               <div class="s-menu">
                 <ul>
-                  <li>
+                  <li @click="showSidebar = !showSidebar">
                     <router-link to="/home"><div :class="{'blue': $route.path=='/home'}"></div><span class="icon"><i class="mi mi-Home"></i></span> Home</router-link>
                   </li>
-                  <li>
+                  <li @click="showSidebar = !showSidebar">
                     <router-link to="/kasir"><div :class="{'blue': $route.path=='/kasir'}"></div><span class="icon"><i class="mi mi-Calculator"></i></span> Kasir</router-link>
                   </li>
-                  <li>
+                  <li @click="showSidebar = !showSidebar">
                     <router-link to="/pelanggan"><div :class="{ 'blue': $route.path=='/pelanggan' }"></div><span class="icon"><i class="mi mi-Family"></i></span> Pelanggan</router-link>
                   </li>
                   <li>
@@ -47,6 +48,10 @@
             </div>
           </div>
           <div class="main">
+            <div class="toogle-menu">
+              <i class="mi mi-GridView" @click="showSidebar = !showSidebar"></i>
+              
+            </div>
             <div class="content">
               <router-view/>
             </div>
@@ -65,7 +70,11 @@
 <script>
 
 export default {
-  name: 'app'
+data(){
+  return {
+      showSidebar: false
+    }
+  },
 }
 </script>
 <style src='./assets/css/grid.min.css'></style>
@@ -94,13 +103,14 @@ export default {
   padding: 12px 0px;
 }
 .sidebar .side-content .user .img{
-    height: 40px;
-    width: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     display: inline-block;
-    background-image: url("./assets/logo.png");
+    background-image: url("./assets/img/user.png");
     background-position: center;
     box-shadow: 0px 2px 8px #8080806b;
+    border: 2px solid gray;
     background-size: cover;
 }
 .sidebar .side-content .user .name{
@@ -167,9 +177,6 @@ export default {
   padding-right: 10px;
   font-size: 17px;
 }
-.sidebar .side-content .s-menu ul li .active{
-    /* border-left: 3px solid #0063B1 !important; */
-}
 .sidebar .side-content .s-menu ul li a:hover{
     background-color: rgb(224, 224, 224);
     border-left: 3px solid rgb(224, 224, 224);
@@ -189,13 +196,59 @@ export default {
 .main .content{
   padding: 100px 50px 0px 50px;
 }
-@media (max-width: 992px){
+.toogle-menu{
+  position: fixed;
+  padding: 12px 20px 6px;
+  width: 100%;
+  background-color: #0078D7;
+  box-shadow: 0px 2px 8px #8080806b;
+  z-index: 99;
+  visibility: hidden;
+}
+.toogle-menu i{
+  font-size: 24px;
+  color: white;
+}
+.toogle-menu b{
+  font-size: 18px;
+  color: white;
+  font-weight: 200;
+  margin-top: -20px;
+}
+.toogle-menu i:hover{
+  cursor: pointer;
+}
+@media only screen and (max-width: 992px) {
+  .toogle-menu{
+    visibility: visible;
+  }
+  .showSidebar{
+    left: 0px !important;
+    z-index: 1;
+    transition: all 200ms ease-in-out;
+    width: 280px;
+    box-shadow: 0px 2px 8px #8080806b;
+  }
+  .opacity{
+    z-index: 1;
+    background-color: #4c4c4c14;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    transition: all 200ms ease-in-out;
+  }
   .sidebar{
-  left: -295px;
-  transition: 1000ms;
+    left: -295px;
+    transition: all 200ms ease-in-out;
+    z-index: 1;
   }
   .main{
   width: 100%;
+  }
+  .main .content{
+  padding: 100px 15px 0px 15px;
   }
 }
 </style>

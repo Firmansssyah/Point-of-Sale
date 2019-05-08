@@ -11,7 +11,7 @@
                                 <i class="mi mi-Contact"></i>
                                 <input type="text" class="costumer" placeholder="Nama Pelanggan">
                                 <i class="mi mi-Calendar"></i>
-                                <input type="text" class="date" value="28 - Desember - 2019">
+                                <input type="text" class="date" placeholder="dd/mm/yy">
                                 <i class="mi mi-Tiles"></i>
                                 <input type="text" class="costumer" placeholder="Alamat">
                             </div>
@@ -44,7 +44,7 @@
                             <table>
                                 <tr>
                                     <td>Diskon</td>
-                                    <td>:<input type="text" v-model="discount"> %</td>
+                                    <td>: <input type="text" v-model="discount" style="width:40px;"> %</td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
@@ -173,10 +173,12 @@ export default {
 .component .card .head-card .attr{
     padding-top: 20px;
 }
-.component .card .head-card .attr input:focus,
 .component .card .head-card .attr input:hover{
+    box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.18), 0 1.6px 3.6px rgba(0, 0, 0, 0.22);
+}
+.component .card .head-card .attr input:focus{
     outline: none;
-    border: 0.5px solid white;
+    border: 0.5px solid var(--primary-color);
     transition: 300ms;
     box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.18), 0 1.6px 3.6px rgba(0, 0, 0, 0.22);
 }
@@ -279,7 +281,12 @@ export default {
 .component .card .footer-card table tr td button:focus{
     outline: none;
 }
-@media (max-width: 992px){
-  
+@media only screen and (max-width: 600px) {
+    .component .card .head-card .attr .costumer,
+    .component .card .head-card .attr .addres,
+    .component .card .head-card .attr .date{
+        width: 85%;
+        margin-bottom: 4px;
+    }
 }
 </style>
