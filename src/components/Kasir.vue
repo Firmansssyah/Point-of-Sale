@@ -8,14 +8,18 @@
                         <div class="head-card">
                             <div class="search-product">
                                 <i class="mi mi-Search"></i>
-                                <input type="text" placeholder="Cari Produk" v-model="isSearch">
+                                <input type="text" placeholder="Cari Produk" v-model="isSearch" @focus="showResult = true" @blur="showResult = false">
                                 <b class="mi mi-Cancel" v-on:click="deleteSearch()" v-bind:style= "[isSearch == '' ? {'visibility': 'hidden'} : {'visibility': 'visible'}]"></b>
+                            </div>
+                            <div class="search-result" v-bind:style= "[showResult == false ? {'visibility': 'hidden'} : {'visibility': 'visible'}]">
+                                <div>Philip 18 W</div>
+                                <div>Roti Zebra</div>
                             </div>
                             <div class="attr">
                                 <i class="mi mi-Contact"></i>
                                 <input type="text" class="costumer" placeholder="Nama Pelanggan">
                                 <i class="mi mi-Calendar"></i>
-                                <input type="text" class="date" placeholder="dd/mm/yy">
+                                <input type="text" class="date" placeholder="dd/mm/yy" v-model="dateNow">
                                 <i class="mi mi-Tiles"></i>
                                 <input type="text" class="costumer" placeholder="Alamat">
                             </div>
@@ -64,9 +68,9 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="padding-top: 12px;">
-                                        <button class="btn-primary bg-primary">Transaksi</button>
-                                        <button class="btn-success">Simpan</button>
-                                        <button class="btn-danger">Batal</button>
+                                        <button style="background: #0078D7; color: white">Transaksi</button>
+                                        <button style="border-color: green; color: green;">Simpan</button>
+                                        <button style="border-color: red; color: red;">Batal</button>
                                     </td>
                                 </tr>
                             </table>
@@ -82,7 +86,9 @@
 export default {
     data(){
         return {
-            isSearch: "",
+            dateNow: new Date().toISOString().slice(0,10),
+            isSearch: '',
+            showResult: false,
             discount: 0,
             totals: 0,
             bayar: 20000,
@@ -184,6 +190,21 @@ export default {
     padding: 10px;
     margin-left: -35px;
     cursor: pointer;
+}
+.component .card .head-card .search-result{
+    margin-top: 8px;
+    padding: 8px 15px 8px 15px;
+    background-color: white;
+    border-radius: 2px;
+    width: 50%;
+    box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.18), 0 1.6px 3.6px rgba(0, 0, 0, 0.22);
+    position: absolute;
+    z-index: 1;
+    transition: 20ms ease-out;
+    visibility: hidden;
+}
+.show-result{
+    visibility: visible;
 }
 .component .card .head-card .attr{
     padding-top: 20px;
