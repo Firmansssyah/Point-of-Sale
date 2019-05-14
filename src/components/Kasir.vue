@@ -6,7 +6,11 @@
                 <div class="col-lg-10">
                     <div class="card">
                         <div class="head-card">
-                            <div class="search-product"><i class="mi mi-Search"></i><input type="text" placeholder="Cari Produk"></div>
+                            <div class="search-product">
+                                <i class="mi mi-Search"></i>
+                                <input type="text" placeholder="Cari Produk" v-model="isSearch">
+                                <b class="mi mi-Cancel" v-on:click="deleteSearch()" v-bind:style= "[isSearch == '' ? {'visibility': 'hidden'} : {'visibility': 'visible'}]"></b>
+                            </div>
                             <div class="attr">
                                 <i class="mi mi-Contact"></i>
                                 <input type="text" class="costumer" placeholder="Nama Pelanggan">
@@ -78,6 +82,7 @@
 export default {
     data(){
         return {
+            isSearch: "",
             discount: 0,
             totals: 0,
             bayar: 20000,
@@ -114,9 +119,12 @@ export default {
                 this.kembali = 0
             }
             return this.kembali
-        },        
+        },
     },
     methods: {
+    deleteSearch(){
+        return this.isSearch = "";
+    },
     formatPrice(value) {
         let val = (value/1).toFixed(0).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -152,7 +160,7 @@ export default {
     transition: 300ms;
 }
 .component .card .head-card .search-product input{
-    padding: 8px 8px 8px 30px;
+    padding: 8px 35px 8px 35px;
     border: 0.5px solid grey;
     border-radius: 2px;
     width: 50%;
@@ -169,6 +177,13 @@ export default {
     outline: none;
     position: absolute;
     padding: 10px;
+}
+.component .card .head-card b{
+    outline: none;
+    position: absolute;
+    padding: 10px;
+    margin-left: -35px;
+    cursor: pointer;
 }
 .component .card .head-card .attr{
     padding-top: 20px;
