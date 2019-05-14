@@ -5,6 +5,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="sidebar" v-bind:class="{ showSidebar: showSidebar }">
+            <div class="toogle"><i class="mi mi-Back" @click="showSidebar = !showSidebar"></i></div>
             <div class="side-content">
               <div class="s-title">Pos-App</div>
               <div class="user">
@@ -49,8 +50,7 @@
           </div>
           <div class="main">
             <div class="toogle-menu">
-              <i class="mi mi-GridView" @click="showSidebar = !showSidebar"></i>
-              
+              <i class="mi mi-GridView" @click="showSidebar = !showSidebar"></i>  
             </div>
             <div class="content">
               <router-view/>
@@ -90,6 +90,18 @@ data(){
   background-color: rgb(243, 241, 239);
   width: 23%;
   color: #00080f;
+}
+.sidebar .toogle{
+  position: absolute;
+  padding: 10px;
+  right: 0;
+  visibility: hidden;
+}
+.sidebar .toogle i{
+  border: 1px solid #0078D7;
+  padding: 10px;
+  color: #0078D7;
+  cursor: pointer;
 }
 .sidebar .side-content{
   padding: 40px;
@@ -220,6 +232,9 @@ data(){
 }
 @media only screen and (max-width: 992px) {
   .toogle-menu{
+    visibility: visible;
+  }
+  .sidebar .toogle{
     visibility: visible;
   }
   .showSidebar{

@@ -12,8 +12,8 @@
                                 <b class="mi mi-Cancel" v-on:click="deleteSearch()" v-bind:style= "[isSearch == '' ? {'visibility': 'hidden'} : {'visibility': 'visible'}]"></b>
                             </div>
                             <div class="search-result" v-bind:style= "[showResult == false ? {'visibility': 'hidden'} : {'visibility': 'visible'}]">
-                                <div>Philip 18 W</div>
-                                <div>Roti Zebra</div>
+                                <div class="result-list">Philip 18 W <i class="mi mi-Add"></i></div>
+                                <div class="result-list">Roti Zebra <i class="mi mi-Add"></i></div>
                             </div>
                             <div class="attr">
                                 <i class="mi mi-Contact"></i>
@@ -166,7 +166,7 @@ export default {
     transition: 300ms;
 }
 .component .card .head-card .search-product input{
-    padding: 8px 35px 8px 35px;
+    padding: 8px 22px 8px 35px;
     border: 0.5px solid grey;
     border-radius: 2px;
     width: 50%;
@@ -192,12 +192,9 @@ export default {
     cursor: pointer;
 }
 .component .card .head-card .search-result{
+    background-color: #f9f8f6;
     margin-top: 8px;
-    padding: 8px 15px 8px 15px;
-    background-color: white;
-    border-radius: 2px;
     width: 50%;
-    box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.18), 0 1.6px 3.6px rgba(0, 0, 0, 0.22);
     position: absolute;
     z-index: 1;
     transition: 20ms ease-out;
@@ -205,6 +202,19 @@ export default {
 }
 .show-result{
     visibility: visible;
+}
+.component .card .head-card .search-result .result-list{
+    margin-bottom: 2px;
+    padding: 4px 16px;
+    border-radius: 2px;
+    box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.18), 0 1.6px 3.6px rgba(0, 0, 0, 0.22);
+    background-color: white;
+}
+.component .card .head-card .search-result .result-list i{
+    margin-top: -7px;
+    right: 0;
+    color: #0078D7;
+    cursor: pointer;
 }
 .component .card .head-card .attr{
     padding-top: 20px;
