@@ -205,7 +205,7 @@ export default {
 }
 .component .card .head-card .search-result .result-list{
     margin-bottom: 2px;
-    padding: 4px 16px;
+    padding: 8px 16px;
     border-radius: 2px;
     box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.18), 0 1.6px 3.6px rgba(0, 0, 0, 0.22);
     background-color: white;

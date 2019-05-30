@@ -18,25 +18,32 @@
               <div class="s-menu">
                 <ul>
                   <li @click="showSidebar = !showSidebar">
-                    <router-link to="/home"><div :class="{'blue': $route.path=='/home'}"></div><span class="icon"><i class="mi mi-Home"></i></span> Home</router-link>
+                    <router-link to="/home"><div></div>
+                    <span class="icon"><i class="mi mi-Home"></i></span> Home</router-link>
                   </li>
                   <li @click="showSidebar = !showSidebar">
-                    <router-link to="/kasir"><div :class="{'blue': $route.path=='/kasir'}"></div><span class="icon"><i class="mi mi-Calculator"></i></span> Kasir</router-link>
+                    <router-link to="/kasir"><div></div:>
+                    <span class="icon"><i class="mi mi-Calculator"></i></span> Kasir</router-link>
                   </li>
                   <li @click="showSidebar = !showSidebar">
-                    <router-link to="/pelanggan"><div :class="{ 'blue': $route.path=='/pelanggan' }"></div><span class="icon"><i class="mi mi-Family"></i></span> Pelanggan</router-link>
+                    <router-link to="/pelanggan"><div></div>
+                    <span class="icon"><i class="mi mi-Family"></i></span> Pelanggan</router-link>
                   </li>
                   <li>
-                    <router-link to="/"><span class="icon"><i class="mi mi-Tiles"></i></span> Produk</router-link>
+                    <router-link to="/produk"><div></div>
+                    <span class="icon"><i class="mi mi-Tiles"></i></span> Produk</router-link>
                   </li>
                   <li>
-                    <router-link to="/"><span class="icon"><i class="mi mi-CalculatorPercentage"></i></span> Diskon</router-link>
+                    <router-link to="/diskon"><div></div>
+                    <span class="icon"><i class="mi mi-CalculatorPercentage"></i></span> Diskon</router-link>
                   </li>
                   <li>
-                    <router-link to="/"><span class="icon"><i class="mi mi-Contact"></i></span> User</router-link>
+                    <router-link to="/user"><div></div>
+                    <span class="icon"><i class="mi mi-Contact"></i></span> User</router-link>
                   </li>
                   <li>
-                    <router-link to="/"><span class="icon"><i class="mi mi-PowerButton"></i></span> Keluar</router-link>
+                    <router-link to="/keluar">
+                    <span class="icon"><i class="mi mi-PowerButton"></i></span> Keluar</router-link>
                   </li>
                   
                 </ul>
@@ -163,7 +170,7 @@ data(){
 .sidebar .side-content .s-menu ul li:last-child a{
     color: #E74856;
 }
-.blue{
+.router-link-active div{
     width: 4px;
     height: 20px;
     background-color: #0078D7;
